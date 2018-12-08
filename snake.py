@@ -27,6 +27,8 @@ apple_pos = on_grid_random()
 apple = pygame.Surface((10,10))
 apple.fill((255,0,0))
 
+pontuacao = 0
+
 my_direction = LEFT
 
 clock = pygame.time.Clock()
@@ -52,7 +54,11 @@ while True:
     if colisao(snake[0],apple_pos):
         apple_pos = on_grid_random()
         snake.append((0,0))
-    
+        if pontuacao < 30:
+            pontuacao += 10
+        else:
+            pontuacao += 40
+        print(pontuacao)
 
     if my_direction == UP:
         snake[0] = (snake[0][0],snake[0][1] - 10)
@@ -68,6 +74,7 @@ while True:
 
     screen.fill((0,0,0))
     screen.blit(apple,apple_pos)
+
     for pos in snake:
         screen.blit(snake_skin,pos)
         
